@@ -1,0 +1,13 @@
+--- /root/server.go	2000-01-01 02:37:07.926633775 +0000
++++ etcdserver/server.go	2000-01-01 02:47:16.606634065 +0000
+@@ -113,9 +113,8 @@ type Server interface {
+ 
+ // EtcdServer is the production implementation of the Server interface
+ type EtcdServer struct {
+-	cfg *ServerConfig
+-
+ 	r raftNode
++	cfg *ServerConfig
+ 
+ 	w          wait.Wait
+ 	stop       chan struct{}

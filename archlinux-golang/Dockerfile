@@ -14,3 +14,5 @@ RUN  sed -i '/^#.* NoExtract /s/^#//' /etc/pacman.conf
 RUN  rm -r /usr/share/locale/* /usr/share/man/* /usr/include/*
 RUN  pacman -R tar; pacman -Scc
 COPY go-wrapper /usr/local/bin/
+
+CMD ["/usr/lib/systemd/systemd"]
