@@ -1,0 +1,9 @@
+[Unit]
+Description=Clustered etcd
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/etcd
+
+[Install]
+WantedBy=multi-user.target
