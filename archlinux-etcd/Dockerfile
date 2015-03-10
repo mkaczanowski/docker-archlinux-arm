@@ -10,7 +10,9 @@ COPY patches/* /usr/src/etcd-$ETCDI_VERSION/
 COPY config/* /etc/systemd/system/
 RUN cd /usr/src/etcd-$ETCDI_VERSION && patch etcdserver/server.go < server.go.patch
 RUN cd /usr/src/etcd-$ETCDI_VERSION && patch etcdserver/raft.go < raft.go.patch
-RUN cd /usr/src/etcd-$ETCDI_VERSION && ./build 2>&1
+RUN cd /usr/src/etcd-$ETCDI_VERSION && patch store/watcher_hub.go < watcher_hub.go.patch 
+RUN cd /usr/src/etcd-$ETCDI_VERSION && ./build 2>&1  
+
 RUN systemctl enable etcd.service
 RUN ln -s /usr/src/etcd-$ETCDI_VERSION/bin/etcd /usr/bin/
 
