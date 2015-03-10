@@ -8,11 +8,11 @@ RUN mkdir -p /etc/nginx/sites-enabled
 ADD ./config/nginx.service /etc/systemd/system/multi-user.target.wants/nginx.service
 ADD ./config/nginx.conf /etc/nginx/nginx.conf
 ADD ./config/00-default.conf /etc/nginx/sites-enabled/00-default.conf
-RUN mkdir /srv/http/default
-ADD ./default/index.html /srv/http/default/index.html
 
 ONBUILD RUN rm /etc/nginx/sites-enabled/00-default.conf
 ONBUILD ADD ./sites/*.conf /etc/nginx/sites-enabled/
+
+VOLUME ["/srv/http/"]
 
 EXPOSE 80
 EXPOSE 443
