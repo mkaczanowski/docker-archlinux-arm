@@ -11,8 +11,8 @@ RUN cd /usr/src/go/src && ./make.bash --no-clean 2>&1
 ENV PATH /usr/src/go/bin:$PATH
 
 RUN  sed -i '/^#.* NoExtract /s/^#//' /etc/pacman.conf
-RUN  rm -r /usr/share/locale/* /usr/share/man/* /usr/include/*
-RUN  pacman -R tar; pacman -Scc
+RUN  rm -r /usr/share/locale/* /usr/share/man/*
+RUN  pacman -R tar gcc; pacman -Scc
 COPY go-wrapper /usr/local/bin/
 
 CMD ["/usr/lib/systemd/systemd"]
