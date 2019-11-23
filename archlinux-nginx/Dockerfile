@@ -1,20 +1,15 @@
-FROM mkaczanowski/archlinux-systemd
-MAINTAINER Mateusz Kaczanowski, kaczanowski.mateusz@gmail.com
+FROM mkaczanowski/archlinuxarm
+MAINTAINER Mateusz Kaczanowski <kaczanowski.mateusz@gmail.com>
 
-RUN pacman -Syu --noconfirm nginx; systemctl enable nginx
-RUN pacman -Scc --noconfirm; 
-RUN mkdir -p /etc/nginx/conf.d
-RUN mkdir -p /etc/nginx/sites-enabled
-ADD ./config/nginx.service /etc/systemd/system/multi-user.target.wants/nginx.service
-ADD ./config/nginx.conf /etc/nginx/nginx.conf
-ADD ./config/00-default.conf /etc/nginx/sites-enabled/00-default.conf
-
-ONBUILD RUN rm /etc/nginx/sites-enabled/00-default.conf
-ONBUILD ADD ./sites/*.conf /etc/nginx/sites-enabled/
-
-VOLUME ["/srv/http/"]
+RUN pacman -S --noconfirm nginx
+RUN pacman -Scc --noconfirm
+RUN ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
 
 EXPOSE 80
-EXPOSE 443
 
-CMD ["/usr/lib/systemd/systemd"]
+STOPSIGNAL SIGTERM
+
+USER http
+
+CMD ["nginx", "-g", "daemon off;"]
