@@ -1,7 +1,7 @@
 FROM mkaczanowski/archlinuxarm
 MAINTAINER Mateusz Kaczanowski <kaczanowski.mateusz@gmail.com>
 
-RUN pacman -Sy --noconfirm git pyalpm base-devel && pacman -Scc --noconfirm
+RUN pacman -Sy --noconfirm git pyalpm base-devel
 
 RUN sed -i '/NOPASSWD/s/\#//' /etc/sudoers
 RUN useradd -r -g wheel build
@@ -17,6 +17,6 @@ WORKDIR /build/pikaur
 RUN makepkg -sr --noconfirm
 
 USER root
-RUN pacman -U pikaur-*.xz --noconfirm
+RUN pacman -U pikaur-*.xz --noconfirm && pacman -Scc --noconfirm && rm -r /build/*
 
 CMD ["/usr/bin/pikaur"]
