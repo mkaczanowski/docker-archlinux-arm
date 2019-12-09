@@ -1,4 +1,4 @@
-FROM mkaczanowski/pikaur-archlinux
+FROM mkaczanowski/archlinux-pikaur
 MAINTAINER Mateusz Kaczanowski <kaczanowski.mateusz@gmail.com>
 
 RUN pacman -Sy python2 python2-cheetah git --noconfirm
