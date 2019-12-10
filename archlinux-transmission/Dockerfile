@@ -1,7 +1,7 @@
 FROM mkaczanowski/archlinuxarm
 MAINTAINER Mateusz Kaczanowski <kaczanowski.mateusz@gmail.com>
 
-RUN pacman -Sy --noconfirm transmission-cli && pacman -Scc --noconfirm
+RUN pacman -Sy --noconfirm transmission-cli sudo && pacman -Scc --noconfirm
 
 EXPOSE 9091
 EXPOSE 51413
