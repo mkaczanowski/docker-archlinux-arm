@@ -1,7 +1,7 @@
 FROM mkaczanowski/archlinuxarm
 MAINTAINER Mateusz Kaczanowski <kaczanowski.mateusz@gmail.com>
 
-RUN pacman -Sy --noconfirm git pyalpm base-devel
+RUN pacman -Sy --noconfirm git pyalpm base-devel libffi
 
 RUN sed -i '/NOPASSWD/s/\#//' /etc/sudoers
 RUN useradd -r -g wheel build
